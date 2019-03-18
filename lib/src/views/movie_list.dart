@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/src/blocs/movies_bloc.dart';
 import 'package:flutter_bloc/src/models/item_model.dart';
+import 'package:flutter_bloc/src/views/movie_single.dart';
 
 class MovieList extends StatefulWidget {
   @override
@@ -13,6 +14,12 @@ class _MovieListState extends State<MovieList> {
   void initState() {
     moviesBloc.fetchAllMovies();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    moviesBloc.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,14 +42,37 @@ class _MovieListState extends State<MovieList> {
     );
   }
 
-  Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
+  Future<void> _openSingleView({ItemModel item, int index}) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) {
+        return MovieSingle(
+          title: item.results[index].title,
+          posterUrl: item.results[index].backdropPath,
+          description: item.results[index].overview,
+          releaseDate: item.results[index].releaseDate,
+          voteAverage: item.results[index].voteAverage,
+          movieId: item.results[index].id,
+        );
+      })
+    );
+  }
+
+  Widget buildList(AsyncSnapshot<ItemModel> itemSnap) {
     return GridView.builder(
-      itemCount: snapshot.data.results.length,
+      itemCount: itemSnap.data.results.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
-        return Image.network(
-          'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].posterPath}',
-          fit: BoxFit.cover,
+        return InkResponse(
+          onTap: () => this._openSingleView(
+            item: itemSnap.data,
+            index: index
+          ),
+          enableFeedback: true,
+          child: Image.network(
+            'https://image.tmdb.org/t/p/w185${itemSnap.data.results[index].posterPath}',
+            fit: BoxFit.cover,
+          ),
         );
       }
     );
