@@ -10,8 +10,10 @@ class MoviesBloc {
   Observable<ItemModel> get allMovies => this._moviesFetcher.stream;
 
   Future<void> fetchAllMovies() async {
-    final ItemModel itemModel = await this._repository.fetchMovieList();
-    this._moviesFetcher.sink.add(itemModel);
+    try {
+      final ItemModel itemModel = await this._repository.fetchMovieList();
+      this._moviesFetcher.sink.add(itemModel);
+    } catch (e) {}
   }
 
   void dispose() {
