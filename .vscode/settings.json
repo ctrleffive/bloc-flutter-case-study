@@ -1,9 +1,9 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.background": "#dad599",
+    "activityBar.background": "#31e9cc",
     "activityBar.foreground": "#15202b",
     "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#3ba49c",
+    "activityBarBadge.background": "#d452ed",
     "activityBarBadge.foreground": "#15202b"
   },
   "files.autoSave": "onFocusChange"
