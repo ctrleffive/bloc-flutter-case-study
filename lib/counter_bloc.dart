@@ -3,11 +3,11 @@ import 'package:rxdart/subjects.dart';
 import 'package:flutter_bloc/counter_provider.dart';
 
 class CounterBloc {
-  final BehaviorSubject<int> _counterObservable = BehaviorSubject();
+  final PublishSubject<int> _counterObservable = PublishSubject();
   final CounterProvider _provider = CounterProvider();
 
-  Stream get counterStream => _counterObservable.stream;
-  int get currentValue => _counterObservable.value;
+  Stream get counterStream => this._counterObservable.stream;
+  int get currentValue => this._provider.currentValue;
 
   void updateCount() {
     final int count = this._provider.increaseCount();
