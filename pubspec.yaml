@@ -1,5 +1,5 @@
 name: flutter_bloc
-description: Flutter BLOC Implementation
+description: Flutter BLoC Implementation
 version: 1.0.0+1
 
 environment:
@@ -8,6 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  rxdart: ^0.21.0
 
 flutter:
   uses-material-design: true
