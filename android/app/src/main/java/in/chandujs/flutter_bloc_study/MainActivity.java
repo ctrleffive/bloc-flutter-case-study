@@ -1,4 +1,4 @@
-package in.chandujs.flutter_bloc;
+package in.chandujs.flutter_bloc_study;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
